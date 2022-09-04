@@ -1,7 +1,5 @@
 #Ruta Basijokaite
-#Jan/24/2019
-#ERE645 Hydrologic Modeling Spring 2019
-#Homework Nr1
+#ERE645 Hydrologic Modeling 
 
 #This code reads in data and calulated average discharge for 20 year period
 #as well as yearly averages
@@ -72,7 +70,7 @@ for (i in seq(Start_year,Last_year-1)){
 #Rounding up the final values to two significant digits
 Year_aver=round(Yearly_aver,2) 
 
-#Another version to get yearly averages without manipulating date in excel
+#Another version to get yearly averages without initial pre-processing of dates in excel prior to uploading dataset in R
 
 #Uploading file
 Genesee<-read.csv(file="Genesee_data2.csv",sep=",",header=F)
@@ -99,14 +97,3 @@ for (i in seq(Start_year_data2,Last_year_data2-1)){
 }
 
 Yr_aver_data2=round(Yearly_aver_data2,2)
-
-write("Ruta Basijokaite","Basijokaite_HW1.out")
-write("ERE445/645","Basijokaite_HW1.out",append=T)
-write("Total and annual discharge values from Genesee River","Basijokaite_HW1.out",append=T)
-write("Jan 24, 2019","Basijokaite_HW1.out",append=T)
-write("  ","Basijokaite_HW1.out",append=T)
-write(paste("Total average = ",Average_20y),"Basijokaite_HW1.out",append=T)
-write("  ","Basijokaite_HW1.out",append=T)
-write("Annual averages: ","Basijokaite_HW1.out",append=T)
-write(paste("Annual average in WT",1998:2017,"=", Yr_aver_data2),"Basijokaite_HW1.out",append=T)
-
