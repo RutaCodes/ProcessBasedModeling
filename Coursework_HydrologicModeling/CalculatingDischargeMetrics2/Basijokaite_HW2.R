@@ -1,7 +1,5 @@
 #Ruta Basijokaite
-#Feb/5/2019
-#ERE645 Hydrologic Modeling Spring 2019
-#Homework Nr2
+#ERE645 Hydrologic Modeling 
 
 #This code determines annual streamflow averages, maximums and 7 day minimums. In addition,
 #it uses functions to calculate 100 year flood using log-Pearson III distribution and 
@@ -111,26 +109,9 @@ mean_ann_7day_min=round(mean(day7_min),2)
 st_dev_ann_7day_min=round(sd(day7_min),2)
 
 #load all function in this file
-source("Basijokaite_HW2_Fun.R")
+source("LN3_LP3_Fun.R")
 per_LP3=0.99
 per_LN3=0.1
-#LN3_val=round(LN3(mean_ann_7day_min,mean_ann_max,mean_ann_aver,per_LN3,Yearly_aver),2)
 LN3_val=round(LN3(day7_min,per_LN3),2)
 LP3_val=round(LP3(Max_annQ,per_LP3),2)
 
-write("Ruta Basijokaite","Basijokaite_HW2.out")
-write("ERE445/645 HW2","Basijokaite_HW2.out",append=T)
-write("Feb 5, 2019","Basijokaite_HW2.out",append=T)
-write("  ","Basijokaite_HW2.out",append=T)
-write("Annual average, maximum, and 7day minimum discharge values from Genesee River:","Basijokaite_HW2.out",append=T)
-write(paste(1998:2017,"annual average =", round(Yearly_aver,0),"cfs; maximum =",Max_annQ,"cfs; minimum =",round(day7_min,0),"cfs"),"Basijokaite_HW2.out",append=T)
-write("  ","Basijokaite_HW2.out",append=T)
-write(paste("Mean of annual averages =",mean_ann_aver,"cfs"),"Basijokaite_HW2.out",append=T)
-write(paste("Standard deviation of annual averages =",st_dev_ann_aver,"cfs"),"Basijokaite_HW2.out",append=T)
-write(paste("Mean of annual maximums =",mean_ann_max,"cfs"),"Basijokaite_HW2.out",append=T)
-write(paste("Standard deviation of annual maximums =",st_dev_ann_max,"cfs"),"Basijokaite_HW2.out",append=T)
-write(paste("Mean of annual 7day minimums =",mean_ann_7day_min,"cfs"),"Basijokaite_HW2.out",append=T)
-write(paste("Standard deviation of annual 7day minimums =",st_dev_ann_7day_min,"cfs"),"Basijokaite_HW2.out",append=T)
-write("  ","Basijokaite_HW2.out",append=T)
-write(paste("100 year flood using a log-Pearson III distribution =",LP3_val,"cfs"),"Basijokaite_HW2.out",append=T)
-write(paste("7-day 10-year low streamflow using a 3-parameter lognormal distribution =",LN3_val,"cfs"),"Basijokaite_HW2.out",append=T)
