@@ -1,10 +1,8 @@
 #Ruta Basijokaite
-#March/1/2019
-#ERE645 Hydrologic Modeling Spring 2019
-#Homework Nr4
+#ERE645 Hydrologic Modeling 
 
-#This code uses leaps to identify potential explanatory variables to create model to
-#predict average streamflow, Q100 and 7Q10. Different models created are then
+#This code uses leaps to identify potential explanatory variables to create model for
+#predicting average streamflow, Q100 and 7Q10. Different models created are then
 #compared using various regression analysis techniques to find the best model
 
 #Variables:
@@ -25,7 +23,7 @@
 #r_1, r_2, r_3 - residual normality for each test
 
 #Uploading file
-Data_all<-read.csv(file="Homework_4_Data.csv",sep=",",header=T)
+Data_all<-read.csv(file="Data.csv",sep=",",header=T)
 n_1<-dim(Data_all) #dimension of dataset
 n=n_1[1] #length of dataset
 c=n_1[2] #number columns
@@ -33,7 +31,7 @@ Data=Data_all[1:n-1,] #data excluding last site
 #Watershed characteristic in log space
 Data_n=log(Data[,4:c])
 
-source("Basijokaite_leaps_fun.R")
+source("Leaps_fun.R")
 Data_var=Data_n[,5:dim(Data_n)[2]]
 Q_aver=Data_n[,1]
 A_var_T=Leap_loop(Data_n,Q_aver)
@@ -127,7 +125,6 @@ m2b=lm(Q_100~Data_var[,a1b]+Data_var[,a2b]+Data_var[,a3b]+Data_var[,a4b]+Data_va
 #summary(m2b) #a2 gives p=0.851369
 #Model 3 without a2b (6 explanatory variables)
 m3b=lm(Q_100~Data_var[,a1b]+Data_var[,a3b]+Data_var[,a4b]+Data_var[,a5b]+Data_var[,a6b]++Data_var[,a7b])
-#summary(m2b)
 summary(m3b)
 
 #Stepwise regression
@@ -238,12 +235,7 @@ r_3<-cor(res3,qnorm((rank(res3)-(3/8))/(length(res3)+(1/4))))
 library(car)
 vif(m3c)
 #######################################################
-#Estimates for Genesee site used for HW 1,2, and 3
-Qaver_HW1=1393.03
-Q100_HW3=26993.65 #using daily Q values
-Q100_peaks_HW=41963.48
-source("Basijokaite_HW3.R")
-source("Basijokaite_HW3_Fun.R")
+source("LN3_LP3_Fun.R")
 Q_7_10_val=round(LN3(day7_min,per_LN3),2)
 
 #predicting values with developed models 
@@ -269,11 +261,3 @@ Q_7_10_site_ln=B3[1]+B3[2]*Data_Gen[,a1c]+B3[3]*Data_Gen[,a2c]+B3[4]*Data_Gen[,a
 Qaver_site=exp(Qaver_site_ln)
 Q100_site=exp(Q100_site_ln)
 Q_7_10_site=exp(Q_7_10_site_ln)
-
-#write("Ruta Basijokaite","Basijokaite_HW4.out")
-#write("ERE445/645 HW4","Basijokaite_HW4.out",append=T)
-#write("March 1, 2019","Basijokaite_HW4.out",append=T)
-#write("  ","Basijokaite_HW4.out",append=T)
-##write("Average monthly streamflow values:","Basijokaite_HW4.out",append=T)
-##write.table(Month_out,"Basijokaite_HW4.out",append=T)
-#write("  ","Basijokaite_HW4.out",append=T)
