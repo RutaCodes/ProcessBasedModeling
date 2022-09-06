@@ -1,7 +1,5 @@
 #Ruta Basijokaite
-#Feb/18/2019
-#ERE645 Hydrologic Modeling Spring 2019
-#Homework Nr3
+#ERE645 Hydrologic Modeling 
 
 #This code calculates montly streamflow averages, annual streamflow averages, maximums and 7 day minimums. In addition,
 #it uses functions to calculate 100 year flood using log-Pearson III distribution and 
@@ -139,8 +137,8 @@ for (i in seq(Start_year,Last_year-1)){
   day7_min[count]=min(day7_aver) #annual 7 day minimum
 }
 
-#load all function in this file
-source("Basijokaite_HW3_Fun.R")
+#load functions
+source("LN3_LP3_Fun.R")
 per_LP3=0.99
 per_LN3=0.1
 LN3_val=round(LN3(day7_min,per_LN3),2)
@@ -152,12 +150,10 @@ LP3_val_peak=round(LP3(Peak_v,per_LP3),2)
 #Plotting
 Wat_Y=c("1998","1999","2000","2001","2002","2003","2004","2005","2006","2007","2008","2009","2010","2011","2012","2013","2014","2015","2016","2017")
 par(mfrow=c(1,1))
-#plot(1:20,Yearly_aver,log="y",col = "red",axes=FALSE)
 plot(log="y",Wat_Y,Yearly_aver,xlab=paste("Water Year"),ylab=paste("Q (cfs)"),ylim=c(10,max(Max_annQ)),main="Annual average, daily maximum and 7-day minimum \n streamflow (1998-2017)",pch=16,cex=0.75)
 points(Wat_Y,day7_min,col = "green",pch=16,cex=0.75)
 points(Wat_Y,Max_annQ,col = "red",pch=16,cex=0.75)
 legend(x="bottomright",legend=c("Annual average","7day min","Daily max"),col=c("black","green","red"),pch=16,cex=0.65,title="Streamflow(cfs)")
-#inset=c(-0.35,0),xpd=TRUE
 
 hist(day7_min,xlab=paste("7day minimim Q (cfs)"),main="7-day annual minimum streamflow distribution 1998-2017")
 points(LN3_val,6,pch=16,col="red")
@@ -167,13 +163,3 @@ hist(Max_annQ,xlab=paste("Max annual daily Q (cfs)"),ylim=c(0,10),main="Annual d
 points(LP3_val,2,pch=16,col="red")
 legend(x="topright",legend=paste("LP3 value",round(LP3_val,0),"cfs"),col=c("red"),pch=16,cex=0.65)
 legend(x="topleft",legend=paste("For comparison:\nLP3 value using\npeak streamflow\nvalues",round(LP3_val_peak,0),"cfs"),cex=0.65,bty = "n")
-
-write("Ruta Basijokaite","Basijokaite_HW3.out")
-write("ERE445/645 HW3","Basijokaite_HW3.out",append=T)
-write("Feb 18, 2019","Basijokaite_HW3.out",append=T)
-write("  ","Basijokaite_HW3.out",append=T)
-write("Average monthly streamflow values:","Basijokaite_HW3.out",append=T)
-write.table(Month_out,"Basijokaite_HW3.out",append=T)
-write("  ","Basijokaite_HW3.out",append=T)
-write(paste("100 year flood using a log-Pearson III distribution with regular dataset =",LP3_val,"cfs"),"Basijokaite_HW3.out",append=T)
-write(paste("100 year flood using a log-Pearson III distribution with peak dataset =",LP3_val_peak,"cfs"),"Basijokaite_HW3.out",append=T)
