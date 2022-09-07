@@ -1,7 +1,5 @@
 #Ruta Basijokaite
-#Mar/20/2019
-#ERE645 Hydrologic Modeling Spring 2019
-#Homework Nr5
+#ERE645 Hydrologic Modeling 
 
 #This code predicts streamflow using simple Q=P-E model and calculates 
 #variuous statistics to estimate its accuracy. Evaporatraspiration
