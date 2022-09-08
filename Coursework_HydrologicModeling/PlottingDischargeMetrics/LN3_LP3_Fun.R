@@ -1,3 +1,5 @@
+#Ruta Basijokaite
+
 #Logonomial distribution
 LN3 <- function(mini, perc){
   #Zp
