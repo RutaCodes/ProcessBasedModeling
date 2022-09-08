@@ -1,3 +1,6 @@
+#Ruta Basijokaite
+
+#Variables used:
 #A1, A2, A3, A4, A5, A6, A7 - leaps variable
 #col, col4, col5, col6, col7 - column number
 #cnt1, cnt2, cnt3, cnt4, cnt5 - counter
