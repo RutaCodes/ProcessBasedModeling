@@ -1,4 +1,6 @@
-#Variables
+#Ruta Basijokaite
+
+#Variables used:
 #N - length of yearly flows
 #Q_sort - sorted streamflow
 #rank - ranked streamflows
