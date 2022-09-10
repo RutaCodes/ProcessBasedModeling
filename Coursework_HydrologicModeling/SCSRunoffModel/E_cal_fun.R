@@ -1,5 +1,8 @@
-#Calculating ET
+#Ruta Basijokaite
 
+#Estimating ET using Hamon method
+
+#Variables used:
 #date - dates
 #Temp_C - temperature values in C
 #N - number of daylight hours
