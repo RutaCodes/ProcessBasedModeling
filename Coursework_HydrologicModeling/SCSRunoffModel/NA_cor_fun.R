@@ -1,5 +1,8 @@
-#Correcting NA values
+#Ruta Basijokaite
 
+#This code corrects NA values
+
+#Variables used:
 #Data_v - dataset of interest that is being corrected 
 #len - length of dataset
 #NonNA - index of non NA values
