@@ -1,3 +1,5 @@
+#Ruta Basijokaite
+
 NSE_Bias_loop<-function(date,Discharge_obs,Q_cfs){
 
 source("Average_fun.R")
