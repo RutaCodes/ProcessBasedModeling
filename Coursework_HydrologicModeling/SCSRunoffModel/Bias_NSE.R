@@ -1,5 +1,8 @@
-#Bias and Nash Sutcliffe Efficiency
+#Ruta Basijokaite
 
+#This code calculates bias and Nash Sutcliffe Efficiency (NSE)
+
+#Variables used:
 #Aver_v - predicted average values
 #Aver_v_obs - observed average values
 #sum_bias - numerator of bias formula
