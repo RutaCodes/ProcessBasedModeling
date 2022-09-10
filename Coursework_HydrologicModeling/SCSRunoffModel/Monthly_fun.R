@@ -1,3 +1,6 @@
+#Ruta Basijokaite
+
+#Variables used:
 #date - dates
 #Precip - precipitation dataset
 #len - length of one year data
