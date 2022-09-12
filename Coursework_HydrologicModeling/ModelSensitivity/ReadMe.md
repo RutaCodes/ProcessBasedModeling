@@ -1,3 +1,6 @@
+MAIN CODE - Sens_anal.R
+This code performs a global sensitivity analysis using the Morris One-factor-At-a-Time (OAT) method on SCS Model to analyze its parameter sensitivity. Parameters analyzed: CN, Kb, M(multiplier of ET). Elementary effect (EE) for each parameter is analyzed, where the model output (y) is the NSE of the monthly average streamflows. p=5 (number of discretization of each parameter) and k=15 (number of repetitions) are used for OAT technique. 
+
 # Why Use Sensitivity Analysis?
 
 Often we are interested in performing model sensitivity analyses to:
