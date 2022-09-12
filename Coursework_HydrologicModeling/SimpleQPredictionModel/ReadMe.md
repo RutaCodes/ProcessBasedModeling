@@ -7,3 +7,5 @@ P - Daily Precipitation;
 E - Estimated Evapotranspiration; 
 
 Evaporatraspiration was calculated using Hamon method.
+
+Data used: 
