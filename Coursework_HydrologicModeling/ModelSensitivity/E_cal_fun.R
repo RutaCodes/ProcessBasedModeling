@@ -1,5 +1,8 @@
-#Calculating ET
+#Ruta Basijokaite
 
+#Calculating ET using Hamon method
+
+#Variables used:
 #date - dates
 #Temp_C - temperature values in C
 #N - number of daylight hours
@@ -23,4 +26,3 @@ E_cal <- function(date,Temp_C){
   }
   return(E)
 }
-
