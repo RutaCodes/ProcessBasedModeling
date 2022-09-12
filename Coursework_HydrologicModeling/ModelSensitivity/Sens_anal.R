@@ -124,4 +124,3 @@ plot(stds[1],means[1],xlab=paste("St. Dev. EE"),ylab=paste("Mean EE"),xlim=c(min
 points(stds[2],means[2],col="blue",pch=16,cex=0.75)
 points(stds[3],means[3],col="red",pch=16,cex=0.75)
 legend(x="bottomright",legend=c("CN","Kb","M"),col=c("black","blue","red"),pch=c(16,16,16),cex=0.6,bty = "n")
-#legend(x="topleft",legend=c("Ruta, Julianne, Mandy"),cex=0.65,bty = "n")
