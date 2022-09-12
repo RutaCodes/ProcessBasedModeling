@@ -1,3 +1,6 @@
+#Ruta Basijokaite
+
+#Variables used:
 #date - dates
 #Precip - precipitation dataset
 #len - length of one year data
@@ -38,7 +41,6 @@ Monthly_loop2 <- function(date,Precip){
     }
     Monthly_P=0.0
     count2=0.0
-    #Monthly_yr_aver=mean(Monthly_P_aver,na.rm=TRUE) #na.rm=TRUE
   }
   for (i in seq(1,12)){
     Monthly_yr_aver[i]=mean(Monthly_P_aver[i,],na.rm=TRUE)
