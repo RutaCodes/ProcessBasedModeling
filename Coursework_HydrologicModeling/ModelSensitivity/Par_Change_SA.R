@@ -1,3 +1,5 @@
+#Ruta Basijokaite
+
 HW_8_look <- function (Pars){
   
   Given_CN2=Pars[1]
@@ -56,12 +58,8 @@ HW_8_look <- function (Pars){
       CN[i]=CN3
     } 
   }
-  
   S=(2540/CN)-25.4
   
-  #P_out=data.frame(date,P_val,AM5)
-  
-  #IF P is < than 0.2*S, then Runoff=0
   SR=0
   I=0
   SR[1:len]=0
@@ -75,7 +73,6 @@ HW_8_look <- function (Pars){
     I[i]=P_val[i]-SR[i]
   }
   
-  #Kb=0.9
   SS=0
   SD=0
   SD[1:len]=0
