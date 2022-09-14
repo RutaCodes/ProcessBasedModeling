@@ -282,7 +282,7 @@ Ann_obs_sim2=Annual_loop(date,Q_sim_cfs2)
 Yearly_aver_sim2=Ann_obs_sim2[,1]
 Mon_sim2=Monthly_loop2(date,Q_sim_cfs2)
 
-#source("Error_met_fun.R")
+#Calculating error metrics
 error_met_new2=NSE_Bias_loop(date,Discharge_obs,Q_sim_cfs2)
 NSE_ann_new2=error_met_new2[3]
 NSE_mon_new2=error_met_new2[4]
