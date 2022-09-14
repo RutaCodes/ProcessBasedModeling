@@ -1,5 +1,8 @@
-#Bias and Nash Sutcliffe Efficiency
+#Ruta Basijokaite
 
+#This code calculates bias and Nash Sutcliffe Efficiency (NSE)
+
+#Variables used:
 #Aver_v - predicted average values
 #Aver_v_obs - observed average values
 #sum_bias - numerator of bias formula
@@ -16,7 +19,6 @@ Bias_v <- function(Aver_v,Aver_v_obs){
     sum_bias=sum_bias+(Aver_v[i]-Aver_v_obs[i])
   }
   bias_val=round(sum_bias/N,5)
-  #bias_val=sum_bias/N
   return(bias_val)
 }
 
