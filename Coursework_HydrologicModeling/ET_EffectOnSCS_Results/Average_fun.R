@@ -1,3 +1,6 @@
+#Ruta Basijokaite
+
+#Variables used:
 #date - dates
 #Discharge - discharge values
 #Start year - starting year for the dataset
@@ -89,4 +92,3 @@ Monthly_loop <- function(date,Discharge){
   }
   return(Monthly_aver)
 }
-
