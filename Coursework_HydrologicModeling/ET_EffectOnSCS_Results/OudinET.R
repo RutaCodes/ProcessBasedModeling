@@ -1,3 +1,7 @@
+#Ruta Basijokaite
+
+#This function estimates daily evapotranspiration using Oudin method
+
 Oudin_ET<-function(J,Ta,lat){
 
 # Initialize PET
