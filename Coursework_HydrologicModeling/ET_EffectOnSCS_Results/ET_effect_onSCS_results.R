@@ -1,5 +1,4 @@
 #Ruta Basijokaite
-#ERE645 Hydrologic Modeling 
 
 #This code predicts streamflow values using SCS Runoff Model (incorporating 
 #surface runoff, snow pack, and snowmelt estimates). Also two PET models are 
