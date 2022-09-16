@@ -1,3 +1,6 @@
+#Ruta Basijokaite
+
+#Variables used:
 #Climate_data - date, temp and precip values extracted from original dataset
 #L1, L2 - min and max date values 
 #Clim_compl - data frame that includes all days in period of interest
