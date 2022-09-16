@@ -1,3 +1,7 @@
+#Ruta Basijokaite
+
+#This code calculates Julian day based on typical date formal
+
 Julian_day<-function(date){
   #date2=as.date(date)
   date_f=as.Date(date,format="%m/%d/%y")
@@ -14,7 +18,6 @@ Julian_day<-function(date){
     jdc_com[,i]=jdc
   }
 }
-
 
 
 minyear = min(date);
