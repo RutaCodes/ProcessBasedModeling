@@ -1,5 +1,4 @@
 #Ruta Basijokaite
-#ERE645 Hydrologic Modeling 
 
 #This code determines annual streamflow averages, maximums and 7 day minimums. In addition,
 #it uses functions to calculate 100 year flood using log-Pearson III distribution and 
