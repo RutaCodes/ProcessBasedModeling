@@ -1,9 +1,9 @@
 #Ruta Basijokaite
-#ERE645 Hydrologic Modeling 
-
+#----------------
 #This code calculates montly streamflow averages, annual streamflow averages, maximums and 7 day minimums. In addition,
 #it uses functions to calculate 100 year flood using log-Pearson III distribution and 
 #3 parameter lognormal distribution. This info was plotted using sccater plots and histograms  
+#----------------
 
 #Variables:
 #Genesee_data - dataset
