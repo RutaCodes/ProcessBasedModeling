@@ -1,10 +1,10 @@
 #Ruta Basijokaite
-#ERE645 Hydrologic Modeling
-
+#-------------------
 #This code fills in the missing precipitaion, Tmin and Tmax data using two sites closeby
 #taking into consideration the distance between them
-
 #-------------------
+
+#Variables used:
 #Genesee_data - observed dataset (full)
 #date - dates
 #Climate - climate data downloaded from NOAA website
