@@ -1,11 +1,10 @@
-#Ruta Basijokaite
-#ERE645 Hydrologic Modeling 
-
+#Ruta Basijokaite 
+#-----------------
 #This code predicts streamflow using simple Q=P-E model and calculates 
 #variuous statistics to estimate its accuracy. Evaporatraspiration
 #is calculated using Hamon method
-
 #-----------------
+
 #Variables
 #Climate - climate data downloaded from NOAA website
 #Climate_data - date, temp and precip values extracted from original dataset
