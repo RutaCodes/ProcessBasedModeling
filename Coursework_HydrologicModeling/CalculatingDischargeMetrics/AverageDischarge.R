@@ -1,5 +1,4 @@
 #Ruta Basijokaite
-#ERE645 Hydrologic Modeling 
 
 #This code reads in data and calulated average discharge for 20 year period
 #as well as yearly averages
