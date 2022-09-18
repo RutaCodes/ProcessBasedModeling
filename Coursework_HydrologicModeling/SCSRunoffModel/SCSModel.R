@@ -1,8 +1,8 @@
 #Ruta Basijokaite
-#ERE645 Hydrologic Modeling 
-
+#---------------- 
 #This code predict streamflow values using SCS Runoff Model (surface runoff is 
 #incorporated as well as subsurface discharge)
+#---------------- 
 
 #Pseudocode for SCS Runoff model:
 #1) Import data about different land cover types covering Genesee River watershed
