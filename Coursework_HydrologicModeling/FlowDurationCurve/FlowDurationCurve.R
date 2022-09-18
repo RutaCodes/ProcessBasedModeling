@@ -1,9 +1,9 @@
 #Ruta Basijokaite
-#ERE645 Hydrologic Modeling 
-
+#----------------
 #This code calculates median flow duration curve and 90% confidence intervals
+#----------------
 
-#Variables
+#Variables used:
 #Genesee_data - observed dataset
 #Discharge_obs - observed discharge
 #date - dates
