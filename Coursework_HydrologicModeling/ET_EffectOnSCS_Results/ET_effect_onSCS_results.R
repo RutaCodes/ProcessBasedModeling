@@ -1,8 +1,9 @@
 #Ruta Basijokaite
-
+#----------------
 #This code predicts streamflow values using SCS Runoff Model (incorporating 
 #surface runoff, snow pack, and snowmelt estimates). Also two PET models are 
 #used - Hammon and Oudin and their effect on streamflow predictions is analyzed
+#----------------
 
 #Variables used:
 #ptm - timer start
