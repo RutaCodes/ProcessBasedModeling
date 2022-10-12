@@ -5,3 +5,10 @@ develop a new routine based on process based equations.
 Add:
 - Equations that I added to improve old model framework
 - MATLAB code
+
+Comparison between two models with varying snow routines:
+
+![image](https://user-images.githubusercontent.com/111301407/195432657-0907e36e-d696-4c4a-8e37-fb822edd2ec7.png)
+![image](https://user-images.githubusercontent.com/111301407/195432687-bffeb366-52ea-4b2e-ac74-cf76f17d8676.png)
+
+New snow routine reduces flashiness in hydrograph, hence improving overall model's ability to simulate streamflow in watersheds like Merced Pohono that is snowmelt dominated. As results show, new model better captures snow routine when refreezing capacity was added to the model.
