@@ -21,7 +21,6 @@ r    = Pars(:,10); %water retention parameter [0, 0.8]
 
 %Initial States
 InState.Xq(1,1:Nq) = 0;
-%InState.Xq(1,1:10) = 0; %Do this if varying Nq (number of quick flow reservoirs)
 InState.Xs(1) = 0;
 InState.XHuz(1) = 0;
 InState.SNl(1) = 0;
@@ -34,7 +33,6 @@ Xq   = InState.Xq;
 Xs   = InState.Xs; 
 Xwl   = InState.SNl; % Liquid water in the snowpack
 Xwi   = InState.SNi; % Ice in the snowpack
-%Qe   = InState.FR; %streamflow available for refreezing
 
 %intermediate calcularions for ice and liquid snowpack form
 Xwl_intra   = 0;
@@ -42,10 +40,6 @@ Xwi_intra   = 0;
 
 for i = 1:length(Period)
     
-%     if i == 3054;
-%         i
-%     else
-%     end
     Day = Period(i)-min(Period)+1;
     
     % Partition precipitation
@@ -116,14 +110,6 @@ for i = 1:length(Period)
         Xwi(i) = Xwi(i)-M(i); %substracting melt from existing snowpack
     end
     
-%     if Pin(i) > 0
-%         if Xwl_intra(i)>Lmax(i)
-%             Xwl_intra(i) = Xwl_intra(i)-Pin(i); %substracting water that infiltrated soil from liquid snowpack
-%         else
-%             
-%         end
-%     end
-    
     %Computing snowpack in ice and liquid water state for next timestep
     Xwi(i+1) = Xwi(i)+ Xwi_intra(i);
     if(Xwl(i) + Xwl_intra(i)) > Lmax(i)
@@ -146,10 +132,9 @@ for i = 1:length(Period)
         Xq(i+1,:) = Xq(i,:);
         Xs(i+1)   = Xs(i);
     end
-end %of i loop
+end 
 
 %Assign to model output
-%Model.XSub = XSub;   % Sublimation
 Model.XHuz = XHuz;   % Model computed upper zone soil moisture tank state contents
 Model.XCuz = XCuz;   % Model computed upper zone soil moisture tank state contents
 Model.Xq   = Xq;     % Model computed quickflow tank states contents
