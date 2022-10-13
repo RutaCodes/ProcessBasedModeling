@@ -1,23 +1,25 @@
+%Ruta Basijokaite
+
 function Model = Hymod10par_edit_v1_rb(Data,Pars)
 
 %Observation data
-Period = Data.Calib.Period;
-Precip = Data.Calib.Precip;
-Evap   = Data.Calib.Evap;
-AT     = Data.Calib.AT;
+Period = Data.Calib.Period; %Study period
+Precip = Data.Calib.Precip; %Daily precipitation
+Evap   = Data.Calib.Evap; %Potential evapotranspiration
+AT     = Data.Calib.AT; %Average daily temperature
 
 %Parameters
-Nq   = 3;
-Kq   = Pars(:,1);
-Ks   = Pars(:,2);
-Alp  = Pars(:,3);
-Hpar = Pars(:,4);
-Bpar = Pars(:,5);
-DDF  = Pars(:,6);
-TT   = Pars(:,7); %Temperature threshold [-3, 3]
-Kf   = Pars(:,8); % degree day factor for refreezing [0, 1]
-TM   = Pars(:,9);
-r    = Pars(:,10); %water retention parameter [0, 0.8]
+Nq   = 3; %Number of quick flow routing tanks
+Kq   = Pars(:,1); %Quick flow reservoir rate constant
+Ks   = Pars(:,2); %Slow flow reservoir rate constant
+Alp  = Pars(:,3); %Division between quick/slow routing
+Hpar = Pars(:,4); %Maximum soil moisture storage 
+Bpar = Pars(:,5); %Distribution of soil storage function shape
+DDF  = Pars(:,6); %Degree day factor (snow melt rate)
+TT   = Pars(:,7); %Temperature threshold - base temperature below which snow forms
+Kf   = Pars(:,8); %Degree day factor for refreezing
+TM   = Pars(:,9); %Base temperature above which melt forms 
+r    = Pars(:,10); %Water retention coefficient  
 
 %Initial States
 InState.Xq(1,1:Nq) = 0;
@@ -34,18 +36,13 @@ Xq   = InState.Xq;
 Xs   = InState.Xs; 
 Xwl   = InState.SNl; % Liquid water in the snowpack
 Xwi   = InState.SNi; % Ice in the snowpack
-%Qe   = InState.FR; %streamflow available for refreezing
 
-%intermediate calcularions for ice and liquid snowpack form
+%Intermediate calculations for ice and liquid snowpack state
 Xwl_intra   = 0;
 Xwi_intra   = 0;
 
 for i = 1:length(Period)
     
-%     if i == 3054;
-%         i
-%     else
-%     end
     Day = Period(i)-min(Period)+1;
     
     % Partition precipitation
@@ -116,14 +113,6 @@ for i = 1:length(Period)
         Xwi(i) = Xwi(i)-M(i); %substracting melt from existing snowpack
     end
     
-%     if Pin(i) > 0
-%         if Xwl_intra(i)>Lmax(i)
-%             Xwl_intra(i) = Xwl_intra(i)-Pin(i); %substracting water that infiltrated soil from liquid snowpack
-%         else
-%             
-%         end
-%     end
-    
     %Computing snowpack in ice and liquid water state for next timestep
     Xwi(i+1) = Xwi(i)+ Xwi_intra(i);
     if(Xwl(i) + Xwl_intra(i)) > Lmax(i)
@@ -146,10 +135,9 @@ for i = 1:length(Period)
         Xq(i+1,:) = Xq(i,:);
         Xs(i+1)   = Xs(i);
     end
-end %of i loop
+end 
 
 %Assign to model output
-%Model.XSub = XSub;   % Sublimation
 Model.XHuz = XHuz;   % Model computed upper zone soil moisture tank state contents
 Model.XCuz = XCuz;   % Model computed upper zone soil moisture tank state contents
 Model.Xq   = Xq;     % Model computed quickflow tank states contents
