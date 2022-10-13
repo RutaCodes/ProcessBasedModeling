@@ -1,6 +1,6 @@
 %Ruta Basijokaite
 
-function Model = Hymod10par_edit_v1_rb(Data,Pars)
+function Model = Hymod10par_new_RB(Data,Pars)
 
 %Observation data
 Period = Data.Calib.Period; %Study period
