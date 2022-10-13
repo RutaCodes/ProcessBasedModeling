@@ -1,4 +1,4 @@
-function Model = Hymod01opt10par(Data,Pars)
+function Model = Hymod10par_old(Data,Pars)
 
 %Observation data
 Period = Data.Calib.Period; %Study period
