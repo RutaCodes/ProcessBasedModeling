@@ -1,28 +1,27 @@
 function Model = Hymod01opt10par(Data,Pars)
 
 %Observation data
-Period = Data.Calib.Period;
-Precip = Data.Calib.Precip;
-Evap   = Data.Calib.Evap;
-AT     = Data.Calib.AT;
-%Parameters
+Period = Data.Calib.Period; %Study period
+Precip = Data.Calib.Precip; %Daily precipitation
+Evap   = Data.Calib.Evap; %Potential evapotranspiration
+AT     = Data.Calib.AT; %Average daily temperature
 
-Kq   = Pars(:,1);
-Nq   = 3;
-Ks   = Pars(:,2);
-Alp  = Pars(:,3);
-Hpar = Pars(:,4);
-Bpar = Pars(:,5);
-DDF  = Pars(:,6);
-TR   = Pars(:,7);
-TS   = Pars(:,8);
-TM   = Pars(:,9);
-SCF  = Pars(:,10);
+%Parameters
+Nq   = 3; %Number of quick flow routing tanks
+Kq   = Pars(:,1); %Quick flow reservoir rate constant 
+Ks   = Pars(:,2); %Slow flow reservoir rate constant 
+Alp  = Pars(:,3); %Division between quick/slow routing
+Hpar = Pars(:,4); %Maximum soil moisture storage
+Bpar = Pars(:,5); %Distribution of soil storage function shape
+DDF  = Pars(:,6); %Degree day factor (snow melt rate)
+TR   = Pars(:,7); %Base temperature below which rain occurs
+TS   = Pars(:,8); %Base temperature below which snow occurs
+TM   = Pars(:,9); %Base temperature above which melt occurs
+SCF  = Pars(:,10); %Snow correction factor
 
 %Initial States
 InState.Xq(1,1:Nq) = 0;
-%InState.Xq(1,1:10) = 0; %Do this if varying Nq (number of quick
-%flow reservoirs)
+%InState.Xq(1,1:10) = 0; %Do this if varying Nq (number of quick flow reservoirs)
 InState.Xs(1) = 0;
 InState.XHuz(1) = 0;
 InState.SN(1) = 0;
@@ -84,7 +83,7 @@ for i = 1:length(Period);
         Xs(i+1)   = Xs(i);
         Xw(i+1)   = Xw(i)+(Ps(i)-M(i));
     end
-end %of i loop
+end 
 
 %Assign to model output
 Model.XSub = XSub;   % Sublimation
