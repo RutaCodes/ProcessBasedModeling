@@ -1,25 +1,27 @@
-function Model = Hymod10par_edit_v1_rb(Data,Pars)
+%Ruta Basijokaite
 
-%Observation data
-Period = Data.Calib.Period;
-Precip = Data.Calib.Precip;
-Evap   = Data.Calib.Evap;
-AT     = Data.Calib.AT;
+function Model = Hymod10par_new_RB(Data,Pars)
 
-%Parameters
-Nq   = 3;
-Kq   = Pars(:,1);
-Ks   = Pars(:,2);
-Alp  = Pars(:,3);
-Hpar = Pars(:,4);
-Bpar = Pars(:,5);
-DDF  = Pars(:,6);
-TT   = Pars(:,7); %Temperature threshold [-3, 3]
-Kf   = Pars(:,8); % degree day factor for refreezing [0, 1]
-TM   = Pars(:,9);
-r    = Pars(:,10); %water retention parameter [0, 0.8]
+% Observation data
+Period = Data.Calib.Period; %Study period
+Precip = Data.Calib.Precip; %Daily precipitation
+Evap   = Data.Calib.Evap; %Potential evapotranspiration
+AT     = Data.Calib.AT; %Average daily temperature
 
-%Initial States
+% Parameters
+Nq   = 3; %Number of quick flow routing tanks 
+Kq   = Pars(:,1); %Quick flow reservoir rate constant 
+Ks   = Pars(:,2); %Slow flow reservoir rate constant 
+Alp  = Pars(:,3); %Division between quick/slow routing
+Hpar = Pars(:,4); %Maximum soil moisture storage
+Bpar = Pars(:,5); %Distribution of soil storage function shape
+DDF  = Pars(:,6); %Degree day factor (snow melt rate)
+TT   = Pars(:,7); %Temperature threshold - base temperature below which snow forms
+Kf   = Pars(:,8); %Degree day factor for refreezing
+TM   = Pars(:,9); %Base temperature above which melt forms
+r    = Pars(:,10); %Water retention coefficient
+
+% Initial States
 InState.Xq(1,1:Nq) = 0;
 InState.Xs(1) = 0;
 InState.XHuz(1) = 0;
@@ -34,7 +36,7 @@ Xs   = InState.Xs;
 Xwl   = InState.SNl; % Liquid water in the snowpack
 Xwi   = InState.SNi; % Ice in the snowpack
 
-%intermediate calcularions for ice and liquid snowpack form
+% Intermediate calculations for ice and liquid snowpack form
 Xwl_intra   = 0;
 Xwi_intra   = 0;
 
@@ -67,7 +69,7 @@ for i = 1:length(Period)
     % Compute water retention capacity
     Lmax(i)=r*(Xwi(i));
     
-    %Compute refreezing (mm/day)
+    % Compute refreezing (mm/day)
     if Lmax(i) > 0 && AT(Day) < TM
         FR(i)=Kf*(TM-AT(Day));
         
@@ -79,14 +81,14 @@ for i = 1:length(Period)
         FR(i)=0;
     end
     
-    %Computing snowpack in ice
+    % Computing snowpack in ice
     if (Ps(i) + FR(i)) > M(i)
         Xwi_intra(i)= Ps(i) + FR(i) - M(i);
     else 
         Xwi_intra(i)=0; %if melt rate is higher than refreezing and snow accumulation that day, no new ice is added to snowpack
     end
     
-    %Computing snowpack as liquid water
+    % Computing snowpack as liquid water
     if (Xwi(i) + Xwl(i)) > 0 %if there is snowpack
         if (Pr(i) + M(i)) > FR(i)
             Xwl_intra(i) = Pr(i) + M(i) - FR(i);
@@ -110,7 +112,7 @@ for i = 1:length(Period)
         Xwi(i) = Xwi(i)-M(i); %substracting melt from existing snowpack
     end
     
-    %Computing snowpack in ice and liquid water state for next timestep
+    % Computing snowpack in ice and liquid water state for next timestep
     Xwi(i+1) = Xwi(i)+ Xwi_intra(i);
     if(Xwl(i) + Xwl_intra(i)) > Lmax(i)
         Xwl(i+1)=Lmax(i); 
@@ -134,7 +136,7 @@ for i = 1:length(Period)
     end
 end 
 
-%Assign to model output
+% Assign to model output
 Model.XHuz = XHuz;   % Model computed upper zone soil moisture tank state contents
 Model.XCuz = XCuz;   % Model computed upper zone soil moisture tank state contents
 Model.Xq   = Xq;     % Model computed quickflow tank states contents
