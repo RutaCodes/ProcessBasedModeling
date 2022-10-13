@@ -6,26 +6,18 @@ sensitivity changes through time.
 
 Functions and data used in the main code:
 
-*AAT_sampling.m*
-- Generates a sample composed of N random of M uncorrelated variables
+*AAT_sampling.m* - Generates a sample composed of N random of M uncorrelated variables
 
-*Data_Bear_lake.mat*
-- Climate data 
+*Data_Bear_lake.mat* - Climate data (daily precipitation and average temperature) 
 
-*Data_Qflow_Bear_lake.mat*
-- Stremflow data
+*Data_Qflow_Bear_lake.mat* - Stremflow data
 
-*Hymod10par_edit_v1_rb.m*
-- HYMOD model
+*Hymod10par_new_RB.m* - HYMOD model
 
-*juliandate.m*
-- Function that converts typical date format m/d/y to day of the year (1-365)
+*juliandate.m* - Function that converts typical date format m/d/y to day of the year (1-365)
 
-*kge.m*
-- Function that calculates Kling-Gupta Efficiency (KGE) Coefficient
+*kge.m* - Function that calculates Kling-Gupta Efficiency (KGE) Coefficient
 
-*oudinET.m*
-- Function that estimates potential evapotranspiration using Oudin method
+*oudinET.m* - Function that estimates potential evapotranspiration using Oudin method
 
-*vbsa_resampling.m*
-- Function that implements the resampling strategy needed to build the approximators of the first-order (main effect) and total-order sensitivity indices
+*vbsa_resampling.m* - Function that implements the resampling strategy needed to build the approximators of the first-order (main effect) and total-order sensitivity indices
