@@ -101,8 +101,8 @@ mo_cnt = 0;
 for a=1:size(XALL,1) % for loop to cycle through random sampling parameter sets
     
     % Run model once
-    Model = Hymod10par_edit_v1_rb(Data,XALL(a,:));%new snow routine
-    %Model = Hymod01opt10par(Data,XALL(a,:));%old snow routine
+    Model = Hymod10par_new_RB(Data,XALL(a,:));%new snow routine
+    %Model = Hymod10par_old(Data,XALL(a,:));%old snow routine
     
     % Specify sim & obs - need to be same size
     qobs = Data.Calib.Flow;
