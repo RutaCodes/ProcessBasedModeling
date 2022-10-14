@@ -1,3 +1,5 @@
+%Ruta Basijokaite
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DATA STRUCTURE
 %   Data.Period = Period of observation data (1:length of observations)
@@ -72,18 +74,9 @@ Data.Calib.AT = tempaver;%in C
 PE_value = oudinET(JD,Data.Calib.AT,lat);%m/day
 Data.Calib.Evap = PE_value*1000; %mm/day
 
-% %OPTIMIZATION
-% [KGE_opt, Opt_vals, Fvals] = SCE_optimiz(Data);
-
 % Define input distribution and ranges:
 M  = 10 ; % number of uncertain parameters 
 DistrFun  = 'unif'  ; % Parameter distribution
-% Assign feasible ranges to 12 parameters
-%DistrPar  = { [ 0.1 1 ]; [ 0 0.2 ]; [ 0 1 ]; [ 5 500]; [ 0 2 ]; [ 1 10 ]; [ 1 3 ]; [ -3 1 ]; [-3 3]; [0 0.1]; [0.9 1.1]; [0.9 1.1] } ; % Parameter ranges
-%Old parameter ranges
-%DistrPar  = { [ 0.1 1 ]; [ 0 0.2 ]; [ 0 1 ]; [ 5 500]; [ 0 2 ]; [ 1 10 ]; [ 1 3 ]; [ -3 1 ]; [-3 3]; [0 0.1] } ; 
-%New parameter ranges
-%DistrPar  = { [ 0.1 0.8 ]; [ 0 0.2 ]; [ 0 0.8 ]; [ 5 500 ]; [ 0 2 ]; [ 1 8 ]; [ 1 3 ]; [ -3 1 ]; [-2 2]; [0 0.05] } ;
 
 %New snow routine 
 DistrPar  = {  [ 0.1 0.8 ]; [ 0 0.2 ]; [ 0 0.8 ]; [ 5 500 ]; [ 0 2 ]; [ 1 8 ]; [ -3, 3 ]; [ 0, 1]; [-2 2]; [0, 0.8] } ;
@@ -110,8 +103,8 @@ mo_cnt=0;
 for a=1:size(XALL,1) % for loop to cycle through random sampling parameter sets
     
     % Run model once
-    Model = Hymod10par_edit_v1_rb(Data,XALL(a,:));%new snow routine
-    %Model = Hymod01opt10par(Data,XALL(a,:));%old snow routine
+    Model = Hymod10par_new_RB(Data,XALL(a,:));%new snow routine
+    %Model = Hymod10par_old(Data,XALL(a,:));%old snow routine
     
     % Specify sim & obs - need to be same size
     qobs = Data.Calib.Flow;
@@ -123,7 +116,7 @@ for a=1:size(XALL,1) % for loop to cycle through random sampling parameter sets
     NSE_whole(a,1)= 1 - (sum((qobs-qsim').^2)/(sum((qobs - mean(qobs)).^2)));
     KGE_whole(a,1)= kge(qsim',qobs);
     
-    for j=1981:2013 %1980:2014
+    for j=1981:2013 
         [x, xx]=find(year==j & month == 10 & day == 1);
         [y, yy]=find(year==(j+1) & month == 9 & day == 30);
         
@@ -136,11 +129,10 @@ for a=1:size(XALL,1) % for loop to cycle through random sampling parameter sets
         NSEyear(a,da) = 1 - (sum((qoyr-qsyr').^2)/(sum((qoyr - mean(qoyr)).^2)));
         WByear(a,da) = sum(abs(qoyr-qsyr'))/sum(qoyr);
         KGEyear(a,da) = kge(qsyr',qoyr);
-        %RREyear(a,da) = 100*[(sum(qsim)/sum(Data.Calib.Precip)) - (sum(qobs)/sum(Data.Calib.Precip))]./(sum(qobs)/sum(Data.Calib.Precip));
         RSMEyear(a,da)=sqrt((1/leng)*sum((qoyr-qsyr').^2));
         
         P_year=sum(precip(x:y));
-        RRyear(1,da) = sum(qoyr)/P_year;%all runs will be the same
+        RRyear(1,da) = sum(qoyr)/P_year; %all runs will be the same
         RRyear_sim(a,da) = sum(qsyr')/P_year;
         
         y = qoyr;
@@ -253,11 +245,13 @@ for i=1:size(KGEyear,2)
 KGE_sorted_val(:,i)=a1;
 KGE_sorted_ind(:,i)=b1;
 end
+
 %recording best yearly qsim runs
 qsim_best=zeros(da,366);
 for i=1:da %qsyr_all(da,:,a)
     qsim_best(i,:)=qsyr_all(KGE_sorted_ind(1,i),:,i);
 end
+
 % sorting q values
 qoyr_down=zeros(da,366); obs_ind=zeros(da,366); 
 qsyr_down=zeros(da,366); sim_ind=zeros(da,366);
@@ -265,6 +259,7 @@ for i=1:da
     [qoyr_down(i,:),obs_ind(i,:)]=sort(qoyr_all(i,:),'descend');
     [qsyr_down(i,:),sim_ind(i,:)]=sort(qsim_best(i,:),'descend');
 end
+
 % calculating EP
 for i=1:length(qsyr_down)
     for j=1:da
@@ -308,13 +303,13 @@ end
 qs1=qs(1:20000,:);
 qs2=qs(20001:40000,:);
 qs3=qs(40001:60000,:);
+                       
 save bear_hymod_5000hyd_Qsim_HydSigRun2.mat qs1 qs2 qs3
-
 save bear_hymod_5000hyd_hydr_sig_HydSigRun2.mat RR_PDif ArnoldBFI_PDif SFDC_PDif CoM_PDif
 save bear_hymod_5000hyd_q_EP_snow_HydSigRun2.mat EP_obs_yr qoyr_down EP_sim_yr qsyr_down
-save bear_hymod_5000hyd_ofs_best_snow_HydSigRun2.mat SFDCE_high_yr SFDCE_mid_yr SFDCE_low_yr SFDCEP_high_yr SFDCEP_mid_yr SFDCEP_low_yr %SFDCE_high_whole SFDCE_mid_whole SFDCE_low_whole %EP_obs EP_obs_yr EP_sim_yr EP_sim
-save bear_hymod_5000hyd_ofs_loop_snow_HydSigRun2.mat SFDCE SFDCEP %SFDCE.high_yr_loop SFDCE.mid_yr_loop SFDCE.low_yr_loop SFDCEP.high_yr_loop SFDCEP.mid_yr_loop SFDCEP.low_yr_loop
-save bear_hymod_5000hyd_objFun_snow_HydSigRun2.mat NSEyear KGEyear WByear NSE_whole KGE_whole RSMEyear %RREyear
+save bear_hymod_5000hyd_ofs_best_snow_HydSigRun2.mat SFDCE_high_yr SFDCE_mid_yr SFDCE_low_yr SFDCEP_high_yr SFDCEP_mid_yr SFDCEP_low_yr 
+save bear_hymod_5000hyd_ofs_loop_snow_HydSigRun2.mat SFDCE SFDCEP 
+save bear_hymod_5000hyd_objFun_snow_HydSigRun2.mat NSEyear KGEyear WByear NSE_whole KGE_whole RSMEyear 
 save bear_SA_5000sim_val_snow_HydSigRun2.mat NSEtop_val NSEtop_index KGEtop_val KGEtop_index Best_KGE_run Best_NSE_run
 save bear_SA_5000sim_snow_HydSigRun2.mat PE_value %data length by 1
 save bear_SA_5000pars_snow_HydSigRun2.mat XALL %N by par  nr
@@ -328,8 +323,6 @@ for c=1:size(NSEyear,2)
   [ NSEyearSi(c,:), NSEyearSTi(c,:) ] = vbsa_indices(NSEyear(i1,c),NSEyear(i2,c),NSEyear(i3,c));
   [ KGEyearSi(c,:), KGEyearSTi(c,:) ] = vbsa_indices(KGEyear(i1,c),KGEyear(i2,c),KGEyear(i3,c)); 
   [ RMSEyearSi(c,:), RMSEyearSTi(c,:) ] = vbsa_indices(RSMEyear(i1,c),RSMEyear(i2,c),RSMEyear(i3,c));
-  %[ MyearSi(c,:), MyearSTi(c,:) ] = vbsa_indices(Myear(i1,c),Myear(i2,c),Myear(i3,c));
-  %[ RREyearSi(c,:), RREyearSTi(c,:) ] = vbsa_indices(RREyear(i1,c),RREyear(i2,c),RREyear(i3,c));
   [ SFDCE_high_yearSi(c,:), SFDCE_high_yearSTi(c,:) ] = vbsa_indices(SFDCE.high_yr_loop(i1,c),SFDCE.high_yr_loop(i2,c),SFDCE.high_yr_loop(i3,c));
   [ SFDCE_mid_yearSi(c,:), SFDCE_mid_yearSTi(c,:) ] = vbsa_indices(SFDCE.mid_yr_loop(i1,c),SFDCE.mid_yr_loop(i2,c),SFDCE.mid_yr_loop(i3,c));
   [ SFDCE_low_yearSi(c,:), SFDCE_low_yearSTi(c,:) ] = vbsa_indices(SFDCE.low_yr_loop(i1,c),SFDCE.low_yr_loop(i2,c),SFDCE.low_yr_loop(i3,c));
@@ -340,7 +333,7 @@ for c=1:size(NSEyear,2)
 end
 
 save bear_sens_yr_run5000_hydr_sig_HydSigRun2.mat RRyearSi RRyearSTi ArBFIyearSi ArBFIyearSTi SFDCyearSi SFDCyearSTi CoMyearSi CoMyearSTi 
-save bear_sens_yr_run5000_snow_HydSigRun2.mat WByearSi WByearSTi NSEyearSi NSEyearSTi KGEyearSi KGEyearSTi RMSEyearSi RMSEyearSTi %RREyearSi RREyearSTi %MyearSi MyearSTi %year nr by par nr
+save bear_sens_yr_run5000_snow_HydSigRun2.mat WByearSi WByearSTi NSEyearSi NSEyearSTi KGEyearSi KGEyearSTi RMSEyearSi RMSEyearSTi 
 save bear_sens_yr_hyd_SFDCE_run5000_snow_HydSigRun2.mat SFDCE_high_yearSi SFDCE_high_yearSTi SFDCE_mid_yearSi SFDCE_mid_yearSTi SFDCE_low_yearSi SFDCE_low_yearSTi
 
 %sensitivity based on output
@@ -352,19 +345,8 @@ end
 
 save bear_sens_QSTi_KGEwhole_run5000_snow_HydSigRun2.mat QSi QSTi KGEwholeSi KGEwholeSTi
 
-%test 2 - normal year, test 3 - water year
-%test 4 - water year, PCF and ATCF are set to 1, to avoid misinterpretation
-%of results due to input changes from PCF
-%test 6 - SA with FDC code
-%test 9nr - SA with new parameter ranges
-%test snow1 - SA with new paranemeter ranges (from 9nr) and new snow routine
-%test snow2 - New snow routine with PET changes
-%test snow_old - Old snow routine with PET changes
-%Newrun1 - run for newly added watersheds
-%of results due to input changes from PCF
-%Hsigrun - SA on higrologig signatures
-%HydSigRun2 - SA on hydrologic signatures with corrected CoM
 %XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+%VISUALIZING  RESULTS
 
 figure; set(gcf,'color','w');
 subplot(2,2,1);
@@ -372,8 +354,6 @@ imagesc(RRyearSTi);hold on; colorbar;
 title('RR');colormap(flipud(gray));caxis([0 1]);
 xticks([1 2 3 4 5 6 7 8 9 10]);
 xticklabels({'Kq','Ks','Alp','H','B','DDF','TT','Kf','TM','r'});
-% yticks([2 3 4 5 6 7 8 9]);
-% yticklabels({'2006','2007','2008','2009','2010','2011','2012','2013'});
 yticks([4 9 14 19 24 29]);
 yticklabels({'1985','1990','1995','2000','2005','2010'});
 subplot(2,2,2);
@@ -418,12 +398,6 @@ figure; set(gcf,'color','w');
 imagesc(KGEwholeSTi);hold on; colorbar;
 title('KGE whole');colormap(flipud(gray));caxis([0 1]);
 
-% figure; set(gcf,'color','w');
-% imagesc(QSTi);hold on; colorbar;
-% title('Q STi daily');colormap(flipud(gray));caxis([0 1]);
-% xticks([1 2 3 4 5 6 7 8 9 10]);
-% xticklabels({'Kq','Ks','Alp','H','B','DDF','TT','Kf','TM','r'});
-
 ob_sim_diff=zeros(size(qs,1),size(qs,2));
 ob_sim_diff_abs=zeros(size(qs,1),size(qs,2));
 for i=1:size(qs,1)
@@ -446,25 +420,17 @@ xticklabels({'Kq','Ks','Alp','H','B','DDF','TT','Kf','TM','r'});
 yticks(aa(2:33)); yticklabels(1983:2014);
 
 cnt=0; Q_diff_STi_yr_av=zeros(33,10);
-%ob_sim_diff_yr_av=zeros(60000,33);
-%Q_sim_yr_av=zeros(60000,33); QSTi_yr_av=zeros(33,10);  
-for j=1981:2013 %1980:2014
+for j=1981:2013
     [x, xx]=find(year==j & month == 10 & day == 1);
     [y, yy]=find(year==(j+1) & month == 9 & day == 30);
     cnt=cnt+1;
     for i=1:10
-        %QSTi_yr_av(cnt,i)=mean(QSTi(x:y,i));
         Q_diff_STi_yr_av(cnt,i)=mean(Q_diff_STi(x:y,i));
     end
-%     for sim=1:60000
-%         %Q_sim_yr_av(sim,cnt)=mean(qs(sim,x:y));
-%         ob_sim_diff_yr_av(sim,cnt)=mean(ob_sim_diff(sim,x:y));
-%     end
 end
 
 for i=1:size(Q_sim_yr_av,2)
-%[Q_ann_Si(i,:),Q_ann_STi(i,:)]=vbsa_indices(Q_sim_yr_av(i1,i),Q_sim_yr_av(i2,i),Q_sim_yr_av(i3,i));
-[Qdiff_ann_Si(i,:),Qdiff_ann_STi(i,:)]=vbsa_indices(ob_sim_diff_yr_av(i1,i),ob_sim_diff_yr_av(i2,i),ob_sim_diff_yr_av(i3,i));
+    [Qdiff_ann_Si(i,:),Qdiff_ann_STi(i,:)]=vbsa_indices(ob_sim_diff_yr_av(i1,i),ob_sim_diff_yr_av(i2,i),ob_sim_diff_yr_av(i3,i));
 end
 
 figure; set(gcf,'color','w');
