@@ -1,4 +1,4 @@
-MAIN CODE - *Bear_SA_10par_newsnow.m*
+MAIN CODE - *Bear_SA_analysis.m*
 - Runs HYMOD model with new snow routine to simulate streamflow during 1981 - 2013 and calculates model performance metrics (i.e Kling-Gupta Efficiency Coefficient) 
 and hydrologic signatures (i.e. Runoff ratio, baseflow index, standard flow duration curve, streamflow centroid). In addition, global Sobol' method was applied 
 pointiwise in time to decompose the variance of model performance into first and total order contributions per model parameter to analyze how model parameter 
