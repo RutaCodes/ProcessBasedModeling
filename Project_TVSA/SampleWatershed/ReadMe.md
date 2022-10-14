@@ -10,7 +10,7 @@ Functions and data used in the main code:
 
 *Data_Bear_lake.mat* - Climate data (daily precipitation and average temperature) 
 
-*Data_Qflow_Bear_lake.mat* - Stremflow data
+*Data_Qflow_Bear_lake.mat* - Streamflow data
 
 *Hymod10par_new_RB.m* - HYMOD model
 
