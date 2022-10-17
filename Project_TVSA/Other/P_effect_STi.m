@@ -1,3 +1,5 @@
+%Ruta Basijokaite
+
 clear all; 
 global Data
 
@@ -41,378 +43,11 @@ load Smith_KGEyearSTi_sort_Pcum.mat
 STi_Ks(:,10)=KGEyearSTi_sort_Pcum(:,2);%Ks
 Precip_Ks(:,10)=Precip_sort(:,10);
 
-%Matrix to verctor
-% % STi_Ks_vec=reshape(STi_Ks,[330,1]);
-% % Precip_Ks_vec=reshape(Precip_Ks,[330,1]);
-
-%Computing confidence interval
-
-% [p,t,stats]=anova1(Precip_Ks,STi_Ks,'Off');
-% [c,m,h,nms]=multcompare(stats);
-
-% N=size(Precip_Ks,1);
-% Precip_mean=mean(Precip_Ks);
-% Precip_SEM=std(Precip_Ks)/sqrt(N);
-% CI95=tinv([0.025 0.975],N-1);
-% yCI95=bsxfun(@times, Precip_SEM, CI95(:));
-
-% figure; set(gcf,'color','w');
-% plot(mean(STi_Ks),Precip_mean);
-% hold on; 
-% plot(mean(STi_Ks),yCI95+Precip_mean);
-% grid;
-% 
-% prec_Ks=Precip_Ks';
-% STi_Ks_rev=STi_Ks';
-% 
-% N=size(prec_Ks,1);
-% Precip_mean=mean(prec_Ks);
-% Precip_SEM=std(prec_Ks)/sqrt(N);
-% CI95=tinv([0.025 0.975],N-1);
-% yCI95=bsxfun(@times, Precip_SEM, CI95(:));
-% 
-% figure; set(gcf,'color','w');
-% plot(mean(STi_Ks_rev),Precip_mean);
-% hold on; 
-% plot(mean(STi_Ks_rev),yCI95+Precip_mean);
-% grid;
-
-%%%%%%%%%%%%%%%%%% Ks H B group %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% figure; set(gcf,'color','w');
-% sz=25;
-% load Precip_sort.mat %pull precip values
-% load NFCache_KGEyearSTi_sort_Pcum.mat %pull STi values
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,1),sz,'filled','r'); hold on;
-% clear STi_val;
-% load Noyo_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,2),sz,'filled','g'); hold on;
-% clear STi_val;
-% load MFEel_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,3),sz,'filled','b'); hold on;
-% clear STi_val;
-% load Salmon_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,4),sz,'filled','y'); hold on;
-% clear STi_val;
-% load SFTrinity_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,5),sz,'filled','k'); hold on;
-% legend('NF Cache','Noyo','MF Eel','Salmon','SF Trinity');
-% ylabel('Cumulative Annual Precipitation (mm)');
-% xlabel('Ks KGE STi');
-
-% figure; set(gcf,'color','w');
-% sz=25;
-% load Precip_sort.mat %pull precip values
-% load NFCache_KGEyearSTi_sort_Pcum.mat %pull STi values
-% STi_val=KGEyearSTi_sort_Pcum(:,4);%H
-% scatter(STi_val,Precip_sort(:,1),sz,'filled','r'); hold on;
-% clear STi_val;
-% load Noyo_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,2),sz,'filled','g'); hold on;
-% clear STi_val;
-% load MFEel_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,3),sz,'filled','b'); hold on;
-% clear STi_val;
-% load Salmon_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,4),sz,'filled','y'); hold on;
-% clear STi_val;
-% load SFTrinity_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,5),sz,'filled','k'); hold on;
-% legend('NF Cache','Noyo','MF Eel','Salmon','SF Trinity');
-% ylabel('Cumulative Annual Precipitation (mm)');
-% xlabel('H KGE STi');
-
-% figure; set(gcf,'color','w');
-% sz=25;
-% load Precip_sort.mat %pull precip values
-% load NFCache_KGEyearSTi_sort_Pcum.mat %pull STi values
-% STi_val=KGEyearSTi_sort_Pcum(:,5);%B
-% scatter(STi_val,Precip_sort(:,1),sz,'filled','r'); hold on;
-% clear STi_val;
-% load Noyo_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,2),sz,'filled','g'); hold on;
-% clear STi_val;
-% load MFEel_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,3),sz,'filled','b'); hold on;
-% clear STi_val;
-% load Salmon_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,4),sz,'filled','y'); hold on;
-% clear STi_val;
-% load SFTrinity_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,5),sz,'filled','k'); hold on;
-% legend('NF Cache','Noyo','MF Eel','Salmon','SF Trinity');
-% ylabel('Cumulative Annual Precipitation (mm)');
-% xlabel('B KGE STi');
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% %Ks group
-% figure; set(gcf,'color','w');
-% load Bull_KGEyearSTi_sort_Pcum.mat %pull STi values
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% %scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
-% scatter(STi_val,Precip_sort(:,6),sz,'filled','r'); hold on;
-% clear STi_val;
-% load Little_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,7),sz,'filled','g'); hold on;
-% clear STi_val;
-% load VanDuzen_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,8),sz,'filled','b'); hold on;
-% clear STi_val;
-% load Redwood_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,9),sz,'filled','y'); hold on;
-% clear STi_val;
-% load Smith_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,10),sz,'filled','k'); hold on;
-% legend('Bull','Little','Van Duzen','Redwood','Smith','Location','northeastoutside');
-% legend('boxoff');
-% ylabel('Cumulative Annual Precipitation (mm)');
-% xlabel('Ks KGE STi');
-% 
-% figure; set(gcf,'color','w');
-% load Bull_KGEyearSTi_sort_Pcum.mat %pull STi values
-% STi_val=KGEyearSTi_sort_Pcum(:,4);%H
-% %scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
-% scatter(STi_val,Precip_sort(:,6),sz,'filled','r'); hold on;
-% clear STi_val;
-% load Little_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,7),sz,'filled','g'); hold on;
-% clear STi_val;
-% load VanDuzen_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,8),sz,'filled','b'); hold on;
-% clear STi_val;
-% load Redwood_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,9),sz,'filled','y'); hold on;
-% clear STi_val;
-% load Smith_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,10),sz,'filled','k'); hold on;
-% legend('Bull','Little','Van Duzen','Redwood','Smith','Location','northeastoutside');
-% legend('boxoff');
-% ylabel('Cumulative Annual Precipitation (mm)');
-% xlabel('H KGE STi');
-% 
-% figure; set(gcf,'color','w');
-% load Bull_KGEyearSTi_sort_Pcum.mat %pull STi values
-% STi_val=KGEyearSTi_sort_Pcum(:,5);%H
-% %scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
-% scatter(STi_val,Precip_sort(:,6),sz,'filled','r'); hold on;
-% clear STi_val;
-% load Little_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,7),sz,'filled','g'); hold on;
-% clear STi_val;
-% load VanDuzen_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,8),sz,'filled','b'); hold on;
-% clear STi_val;
-% load Redwood_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,9),sz,'filled','y'); hold on;
-% clear STi_val;
-% load Smith_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,10),sz,'filled','k'); hold on;
-% legend('Bull','Little','Van Duzen','Redwood','Smith','Location','northeastoutside');
-% legend('boxoff');
-% ylabel('Cumulative Annual Precipitation (mm)');
-% xlabel('B KGE STi');
-% 
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% % H B group
-% figure; set(gcf,'color','w');
-% load Big_KGEyearSTi_sort_Pcum.mat %pull STi values
-% STi_val=KGEyearSTi_sort_Pcum(:,4);%H
-% scatter(STi_val,Precip_sort(:,11),sz,'filled','r'); hold on;
-% clear STi_val;
-% load Lopez_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,12),sz,'filled','g'); hold on;
-% clear STi_val;
-% load Pescadero_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,13),sz,'filled','b'); hold on;
-% clear STi_val;
-% load Cantua_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,14),sz,'filled','y'); hold on;
-% clear STi_val;
-% load BigSur_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,15),sz,'filled','k'); hold on;
-% clear STi_val;
-% load DelPuerto_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,16),sz,'filled','m'); hold on;
-% clear STi_val;
-% load SantaCruz_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,17),sz,'filled','c'); hold on;
-% clear STi_val;
-% load LosGatos_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,18),'+','r'); hold on;
-% clear STi_val;
-% load Arroyo_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,19),'+','g'); hold on;
-% clear STi_val;
-% load Orestimba_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,20),'+','b'); hold on;
-% clear STi_val;
-% load Nacimiento_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,21),'+','k'); hold on;
-% clear STi_val;
-% load SanLorenzo_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,4);
-% scatter(STi_val,Precip_sort(:,22),'+','m'); hold on;
-% legend('Big','Lopez','Pescadero','Cantua','BigSur','DelPuerto','SantaCruz','LosGatos','Arroyo','Orestimba','Nacimiento','SanLorenzo','Location','northeastoutside');
-% legend('boxoff');
-% ylabel('Cumulative Annual Precipitation (mm)');
-% xlabel('H KGE STi');
-% 
-% figure; set(gcf,'color','w');
-% load Big_KGEyearSTi_sort_Pcum.mat %pull STi values
-% STi_val=KGEyearSTi_sort_Pcum(:,5);%B
-% scatter(STi_val,Precip_sort(:,11),sz,'filled','r'); hold on;
-% clear STi_val;
-% load Lopez_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,12),sz,'filled','g'); hold on;
-% clear STi_val;
-% load Pescadero_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,13),sz,'filled','b'); hold on;
-% clear STi_val;
-% load Cantua_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,14),sz,'filled','y'); hold on;
-% clear STi_val;
-% load BigSur_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,15),sz,'filled','k'); hold on;
-% clear STi_val;
-% load DelPuerto_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,16),sz,'filled','m'); hold on;
-% clear STi_val;
-% load SantaCruz_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,17),sz,'filled','c'); hold on;
-% clear STi_val;
-% load LosGatos_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,18),'+','r'); hold on;
-% clear STi_val;
-% load Arroyo_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,19),'+','g'); hold on;
-% clear STi_val;
-% load Orestimba_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,20),'+','b'); hold on;
-% clear STi_val;
-% load Nacimiento_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,21),'+','k'); hold on;
-% clear STi_val;
-% load SanLorenzo_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,5);
-% scatter(STi_val,Precip_sort(:,22),'+','m'); hold on;
-% legend('Big','Lopez','Pescadero','Cantua','BigSur','DelPuerto','SantaCruz','LosGatos','Arroyo','Orestimba','Nacimiento','SanLorenzo','Location','northeastoutside');
-% legend('boxoff');
-% ylabel('Cumulative Annual Precipitation (mm)');
-% xlabel('B KGE STi');
-
-%%%%%% Combining groups %%%%%%
-% figure; set(gcf,'color','w');
-% sz=25;
-% load Precip_sort.mat %pull precip values
-% load NFCache_KGEyearSTi_sort_Pcum.mat %pull STi values
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,1),sz,'filled','r'); hold on;
-% clear STi_val;
-% load Noyo_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,2),sz,'filled','g'); hold on;
-% clear STi_val;
-% load MFEel_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,3),sz,'filled','b'); hold on;
-% clear STi_val;
-% load Salmon_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,4),sz,'filled','y'); hold on;
-% clear STi_val;
-% load SFTrinity_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,5),sz,'filled','k'); hold on;
-% load Bull_KGEyearSTi_sort_Pcum.mat %pull STi values
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% %scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
-% scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
-% clear STi_val;
-% load Little_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,7),'+','g'); hold on;
-% clear STi_val;
-% load VanDuzen_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,8),'+','b'); hold on;
-% clear STi_val;
-% load Redwood_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,9),'+','y'); hold on;
-% clear STi_val;
-% load Smith_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,10),'+','k'); hold on;
-% legend('NF Cache','Noyo','MF Eel','Salmon','SF Trinity','Bull','Little','Van Duzen','Redwood','Smith','Location','northeastoutside');
-% legend('boxoff');
-% ylabel('Cumulative Annual Precipitation (mm)');
-% xlabel('Ks KGE STi');
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 figure; set(gcf,'color','w');sz=25;sz2=22;
 subplot(3,2,1);
 load Precip_sort.mat %pull precip values
-% load NFCache_KGEyearSTi_sort_Pcum.mat %pull STi values
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,1),sz,'filled','r'); hold on;
-% clear STi_val;
-% load Noyo_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,2),sz,'filled','g'); hold on;
-% clear STi_val;
-% load MFEel_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,3),sz,'filled','b'); hold on;
-% clear STi_val;
-% load Salmon_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,4),sz,'filled','y'); hold on;
-% clear STi_val;
-% load SFTrinity_KGEyearSTi_sort_Pcum.mat
-% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
-% scatter(STi_val,Precip_sort(:,5),sz,'filled','k'); hold on;
+
 load Bull_KGEyearSTi_sort_Pcum.mat %pull STi values
 STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
 %s=scatter(STi_val,Precip_sort(:,6),sz2,[0.5 0.5 0.5],'filled');hold on;alpha(s,.5);
@@ -976,3 +611,726 @@ legend('NF Cache','Noyo','MF Eel','Salmon','SF Trinity',['LOP R = ',num2str(C6_1
 legend('boxoff'); grid; xlim([0 3500]); ylim([0 1]);
 xlabel('Cumulative Annual Precipitation (mm)');
 ylabel('B KGE STi');
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % Uncomment when needed 
+%%%%%%%%%%%%%%%%%% Ks H B group %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% figure; set(gcf,'color','w');
+% sz=25;
+% load Precip_sort.mat %pull precip values
+% load NFCache_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,1),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Noyo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,2),sz,'filled','g'); hold on;
+% clear STi_val;
+% load MFEel_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,3),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Salmon_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,4),sz,'filled','y'); hold on;
+% clear STi_val;
+% load SFTrinity_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,5),sz,'filled','k'); hold on;
+% legend('NF Cache','Noyo','MF Eel','Salmon','SF Trinity');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('Ks KGE STi');
+
+% figure; set(gcf,'color','w');
+% sz=25;
+% load Precip_sort.mat %pull precip values
+% load NFCache_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,4);%H
+% scatter(STi_val,Precip_sort(:,1),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Noyo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,2),sz,'filled','g'); hold on;
+% clear STi_val;
+% load MFEel_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,3),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Salmon_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,4),sz,'filled','y'); hold on;
+% clear STi_val;
+% load SFTrinity_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,5),sz,'filled','k'); hold on;
+% legend('NF Cache','Noyo','MF Eel','Salmon','SF Trinity');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('H KGE STi');
+
+% figure; set(gcf,'color','w');
+% sz=25;
+% load Precip_sort.mat %pull precip values
+% load NFCache_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,5);%B
+% scatter(STi_val,Precip_sort(:,1),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Noyo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,2),sz,'filled','g'); hold on;
+% clear STi_val;
+% load MFEel_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,3),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Salmon_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,4),sz,'filled','y'); hold on;
+% clear STi_val;
+% load SFTrinity_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,5),sz,'filled','k'); hold on;
+% legend('NF Cache','Noyo','MF Eel','Salmon','SF Trinity');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('B KGE STi');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %Ks group
+% figure; set(gcf,'color','w');
+% load Bull_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% %scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
+% scatter(STi_val,Precip_sort(:,6),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Little_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,7),sz,'filled','g'); hold on;
+% clear STi_val;
+% load VanDuzen_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,8),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Redwood_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,9),sz,'filled','y'); hold on;
+% clear STi_val;
+% load Smith_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,10),sz,'filled','k'); hold on;
+% legend('Bull','Little','Van Duzen','Redwood','Smith','Location','northeastoutside');
+% legend('boxoff');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('Ks KGE STi');
+% 
+% figure; set(gcf,'color','w');
+% load Bull_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,4);%H
+% %scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
+% scatter(STi_val,Precip_sort(:,6),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Little_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,7),sz,'filled','g'); hold on;
+% clear STi_val;
+% load VanDuzen_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,8),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Redwood_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,9),sz,'filled','y'); hold on;
+% clear STi_val;
+% load Smith_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,10),sz,'filled','k'); hold on;
+% legend('Bull','Little','Van Duzen','Redwood','Smith','Location','northeastoutside');
+% legend('boxoff');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('H KGE STi');
+% 
+% figure; set(gcf,'color','w');
+% load Bull_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,5);%H
+% %scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
+% scatter(STi_val,Precip_sort(:,6),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Little_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,7),sz,'filled','g'); hold on;
+% clear STi_val;
+% load VanDuzen_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,8),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Redwood_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,9),sz,'filled','y'); hold on;
+% clear STi_val;
+% load Smith_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,10),sz,'filled','k'); hold on;
+% legend('Bull','Little','Van Duzen','Redwood','Smith','Location','northeastoutside');
+% legend('boxoff');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('B KGE STi');
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % H B group
+% figure; set(gcf,'color','w');
+% load Big_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,4);%H
+% scatter(STi_val,Precip_sort(:,11),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Lopez_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,12),sz,'filled','g'); hold on;
+% clear STi_val;
+% load Pescadero_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,13),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Cantua_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,14),sz,'filled','y'); hold on;
+% clear STi_val;
+% load BigSur_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,15),sz,'filled','k'); hold on;
+% clear STi_val;
+% load DelPuerto_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,16),sz,'filled','m'); hold on;
+% clear STi_val;
+% load SantaCruz_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,17),sz,'filled','c'); hold on;
+% clear STi_val;
+% load LosGatos_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,18),'+','r'); hold on;
+% clear STi_val;
+% load Arroyo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,19),'+','g'); hold on;
+% clear STi_val;
+% load Orestimba_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,20),'+','b'); hold on;
+% clear STi_val;
+% load Nacimiento_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,21),'+','k'); hold on;
+% clear STi_val;
+% load SanLorenzo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,22),'+','m'); hold on;
+% legend('Big','Lopez','Pescadero','Cantua','BigSur','DelPuerto','SantaCruz','LosGatos','Arroyo','Orestimba','Nacimiento','SanLorenzo','Location','northeastoutside');
+% legend('boxoff');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('H KGE STi');
+% 
+% figure; set(gcf,'color','w');
+% load Big_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,5);%B
+% scatter(STi_val,Precip_sort(:,11),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Lopez_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,12),sz,'filled','g'); hold on;
+% clear STi_val;
+% load Pescadero_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,13),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Cantua_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,14),sz,'filled','y'); hold on;
+% clear STi_val;
+% load BigSur_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,15),sz,'filled','k'); hold on;
+% clear STi_val;
+% load DelPuerto_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,16),sz,'filled','m'); hold on;
+% clear STi_val;
+% load SantaCruz_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,17),sz,'filled','c'); hold on;
+% clear STi_val;
+% load LosGatos_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,18),'+','r'); hold on;
+% clear STi_val;
+% load Arroyo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,19),'+','g'); hold on;
+% clear STi_val;
+% load Orestimba_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,20),'+','b'); hold on;
+% clear STi_val;
+% load Nacimiento_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,21),'+','k'); hold on;
+% clear STi_val;
+% load SanLorenzo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,22),'+','m'); hold on;
+% legend('Big','Lopez','Pescadero','Cantua','BigSur','DelPuerto','SantaCruz','LosGatos','Arroyo','Orestimba','Nacimiento','SanLorenzo','Location','northeastoutside');
+% legend('boxoff');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('B KGE STi');
+
+%%%%%% Combining groups %%%%%%
+% figure; set(gcf,'color','w');
+% sz=25;
+% load Precip_sort.mat %pull precip values
+% load NFCache_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,1),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Noyo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,2),sz,'filled','g'); hold on;
+% clear STi_val;
+% load MFEel_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,3),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Salmon_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,4),sz,'filled','y'); hold on;
+% clear STi_val;
+% load SFTrinity_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,5),sz,'filled','k'); hold on;
+% load Bull_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% %scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
+% scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
+% clear STi_val;
+% load Little_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,7),'+','g'); hold on;
+% clear STi_val;
+% load VanDuzen_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,8),'+','b'); hold on;
+% clear STi_val;
+% load Redwood_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,9),'+','y'); hold on;
+% clear STi_val;
+% load Smith_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,10),'+','k'); hold on;
+% legend('NF Cache','Noyo','MF Eel','Salmon','SF Trinity','Bull','Little','Van Duzen','Redwood','Smith','Location','northeastoutside');
+% legend('boxoff');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('Ks KGE STi');
+
+% figure; set(gcf,'color','w');sz=25;sz2=22;
+% subplot(3,2,1);
+% load Precip_sort.mat %pull precip values
+% load NFCache_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,1),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Noyo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,2),sz,'filled','g'); hold on;
+% clear STi_val;
+% load MFEel_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,3),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Salmon_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%%Matrix to verctor
+% % STi_Ks_vec=reshape(STi_Ks,[330,1]);
+% % Precip_Ks_vec=reshape(Precip_Ks,[330,1]);
+
+%Computing confidence interval
+
+% [p,t,stats]=anova1(Precip_Ks,STi_Ks,'Off');
+% [c,m,h,nms]=multcompare(stats);
+
+% N=size(Precip_Ks,1);
+% Precip_mean=mean(Precip_Ks);
+% Precip_SEM=std(Precip_Ks)/sqrt(N);
+% CI95=tinv([0.025 0.975],N-1);
+% yCI95=bsxfun(@times, Precip_SEM, CI95(:));
+
+% figure; set(gcf,'color','w');
+% plot(mean(STi_Ks),Precip_mean);
+% hold on; 
+% plot(mean(STi_Ks),yCI95+Precip_mean);
+% grid;
+% 
+% prec_Ks=Precip_Ks';
+% STi_Ks_rev=STi_Ks';
+% 
+% N=size(prec_Ks,1);
+% Precip_mean=mean(prec_Ks);
+% Precip_SEM=std(prec_Ks)/sqrt(N);
+% CI95=tinv([0.025 0.975],N-1);
+% yCI95=bsxfun(@times, Precip_SEM, CI95(:));
+% 
+% figure; set(gcf,'color','w');
+% plot(mean(STi_Ks_rev),Precip_mean);
+% hold on; 
+% plot(mean(STi_Ks_rev),yCI95+Precip_mean);
+% grid;
+
+%%%%%%%%%%%%%%%%%% Ks H B group %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% figure; set(gcf,'color','w');
+% sz=25;
+% load Precip_sort.mat %pull precip values
+% load NFCache_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,1),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Noyo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,2),sz,'filled','g'); hold on;
+% clear STi_val;
+% load MFEel_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,3),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Salmon_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,4),sz,'filled','y'); hold on;
+% clear STi_val;
+% load SFTrinity_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,5),sz,'filled','k'); hold on;
+% legend('NF Cache','Noyo','MF Eel','Salmon','SF Trinity');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('Ks KGE STi');
+
+% figure; set(gcf,'color','w');
+% sz=25;
+% load Precip_sort.mat %pull precip values
+% load NFCache_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,4);%H
+% scatter(STi_val,Precip_sort(:,1),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Noyo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,2),sz,'filled','g'); hold on;
+% clear STi_val;
+% load MFEel_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,3),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Salmon_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,4),sz,'filled','y'); hold on;
+% clear STi_val;
+% load SFTrinity_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,5),sz,'filled','k'); hold on;
+% legend('NF Cache','Noyo','MF Eel','Salmon','SF Trinity');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('H KGE STi');
+
+% figure; set(gcf,'color','w');
+% sz=25;
+% load Precip_sort.mat %pull precip values
+% load NFCache_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,5);%B
+% scatter(STi_val,Precip_sort(:,1),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Noyo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,2),sz,'filled','g'); hold on;
+% clear STi_val;
+% load MFEel_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,3),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Salmon_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,4),sz,'filled','y'); hold on;
+% clear STi_val;
+% load SFTrinity_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,5),sz,'filled','k'); hold on;
+% legend('NF Cache','Noyo','MF Eel','Salmon','SF Trinity');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('B KGE STi');
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %Ks group
+% figure; set(gcf,'color','w');
+% load Bull_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% %scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
+% scatter(STi_val,Precip_sort(:,6),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Little_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,7),sz,'filled','g'); hold on;
+% clear STi_val;
+% load VanDuzen_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,8),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Redwood_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,9),sz,'filled','y'); hold on;
+% clear STi_val;
+% load Smith_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,10),sz,'filled','k'); hold on;
+% legend('Bull','Little','Van Duzen','Redwood','Smith','Location','northeastoutside');
+% legend('boxoff');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('Ks KGE STi');
+% 
+% figure; set(gcf,'color','w');
+% load Bull_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,4);%H
+% %scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
+% scatter(STi_val,Precip_sort(:,6),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Little_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,7),sz,'filled','g'); hold on;
+% clear STi_val;
+% load VanDuzen_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,8),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Redwood_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,9),sz,'filled','y'); hold on;
+% clear STi_val;
+% load Smith_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,10),sz,'filled','k'); hold on;
+% legend('Bull','Little','Van Duzen','Redwood','Smith','Location','northeastoutside');
+% legend('boxoff');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('H KGE STi');
+% 
+% figure; set(gcf,'color','w');
+% load Bull_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,5);%H
+% %scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
+% scatter(STi_val,Precip_sort(:,6),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Little_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,7),sz,'filled','g'); hold on;
+% clear STi_val;
+% load VanDuzen_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,8),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Redwood_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,9),sz,'filled','y'); hold on;
+% clear STi_val;
+% load Smith_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,10),sz,'filled','k'); hold on;
+% legend('Bull','Little','Van Duzen','Redwood','Smith','Location','northeastoutside');
+% legend('boxoff');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('B KGE STi');
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % H B group
+% figure; set(gcf,'color','w');
+% load Big_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,4);%H
+% scatter(STi_val,Precip_sort(:,11),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Lopez_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,12),sz,'filled','g'); hold on;
+% clear STi_val;
+% load Pescadero_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,13),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Cantua_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,14),sz,'filled','y'); hold on;
+% clear STi_val;
+% load BigSur_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,15),sz,'filled','k'); hold on;
+% clear STi_val;
+% load DelPuerto_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,16),sz,'filled','m'); hold on;
+% clear STi_val;
+% load SantaCruz_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,17),sz,'filled','c'); hold on;
+% clear STi_val;
+% load LosGatos_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,18),'+','r'); hold on;
+% clear STi_val;
+% load Arroyo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,19),'+','g'); hold on;
+% clear STi_val;
+% load Orestimba_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,20),'+','b'); hold on;
+% clear STi_val;
+% load Nacimiento_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,21),'+','k'); hold on;
+% clear STi_val;
+% load SanLorenzo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,4);
+% scatter(STi_val,Precip_sort(:,22),'+','m'); hold on;
+% legend('Big','Lopez','Pescadero','Cantua','BigSur','DelPuerto','SantaCruz','LosGatos','Arroyo','Orestimba','Nacimiento','SanLorenzo','Location','northeastoutside');
+% legend('boxoff');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('H KGE STi');
+% 
+% figure; set(gcf,'color','w');
+% load Big_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,5);%B
+% scatter(STi_val,Precip_sort(:,11),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Lopez_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,12),sz,'filled','g'); hold on;
+% clear STi_val;
+% load Pescadero_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,13),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Cantua_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,14),sz,'filled','y'); hold on;
+% clear STi_val;
+% load BigSur_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,15),sz,'filled','k'); hold on;
+% clear STi_val;
+% load DelPuerto_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,16),sz,'filled','m'); hold on;
+% clear STi_val;
+% load SantaCruz_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,17),sz,'filled','c'); hold on;
+% clear STi_val;
+% load LosGatos_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,18),'+','r'); hold on;
+% clear STi_val;
+% load Arroyo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,19),'+','g'); hold on;
+% clear STi_val;
+% load Orestimba_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,20),'+','b'); hold on;
+% clear STi_val;
+% load Nacimiento_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,21),'+','k'); hold on;
+% clear STi_val;
+% load SanLorenzo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,5);
+% scatter(STi_val,Precip_sort(:,22),'+','m'); hold on;
+% legend('Big','Lopez','Pescadero','Cantua','BigSur','DelPuerto','SantaCruz','LosGatos','Arroyo','Orestimba','Nacimiento','SanLorenzo','Location','northeastoutside');
+% legend('boxoff');
+% ylabel('Cumulative Annual Precipitation (mm)');
+% xlabel('B KGE STi');
+
+%%%%%% Combining groups %%%%%%
+% figure; set(gcf,'color','w');
+% sz=25;
+% load Precip_sort.mat %pull precip values
+% load NFCache_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,1),sz,'filled','r'); hold on;
+% clear STi_val;
+% load Noyo_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,2),sz,'filled','g'); hold on;
+% clear STi_val;
+% load MFEel_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,3),sz,'filled','b'); hold on;
+% clear STi_val;
+% load Salmon_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,4),sz,'filled','y'); hold on;
+% clear STi_val;
+% load SFTrinity_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,5),sz,'filled','k'); hold on;
+% load Bull_KGEyearSTi_sort_Pcum.mat %pull STi values
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% %scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
+% scatter(STi_val,Precip_sort(:,6),'+','r'); hold on;
+% clear STi_val;
+% load Little_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,7),'+','g'); hold on;
+% clear STi_val;
+% load VanDuzen_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,8),'+','b'); hold on;
+% clear STi_val;
+% load Redwood_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,9),'+','y'); hold on;
+% clear STi_val;
+% load Smith_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,10),'+','k'); hold on;
+% legend('NF Cache','Noyo','MF Eel','Salmon','SF Trinity','Bull','Little','Van Duzen','Redwood','Smith','Location','northeastoutside');
+% legend('boxoff');
+% ylabel('Cumulative Annual PrecipitaKs
+% scatter(STi_val,Precip_sort(:,4),sz,'filled','y'); hold on;
+% clear STi_val;
+% load SFTrinity_KGEyearSTi_sort_Pcum.mat
+% STi_val=KGEyearSTi_sort_Pcum(:,2);%Ks
+% scatter(STi_val,Precip_sort(:,5),sz,'filled','k'); hold on;
+
+%%%%%%%%%%%%%%%%
+%Matrix to verctor
+% % STi_Ks_vec=reshape(STi_Ks,[330,1]);
+% % Precip_Ks_vec=reshape(Precip_Ks,[330,1]);
+
+%Computing confidence interval
+
+% [p,t,stats]=anova1(Precip_Ks,STi_Ks,'Off');
+% [c,m,h,nms]=multcompare(stats);
+
+% N=size(Precip_Ks,1);
+% Precip_mean=mean(Precip_Ks);
+% Precip_SEM=std(Precip_Ks)/sqrt(N);
+% CI95=tinv([0.025 0.975],N-1);
+% yCI95=bsxfun(@times, Precip_SEM, CI95(:));
+
+% figure; set(gcf,'color','w');
+% plot(mean(STi_Ks),Precip_mean);
+% hold on; 
+% plot(mean(STi_Ks),yCI95+Precip_mean);
+% grid;
+% 
+% prec_Ks=Precip_Ks';
+% STi_Ks_rev=STi_Ks';
+% 
+% N=size(prec_Ks,1);
+% Precip_mean=mean(prec_Ks);
+% Precip_SEM=std(prec_Ks)/sqrt(N);
+% CI95=tinv([0.025 0.975],N-1);
+% yCI95=bsxfun(@times, Precip_SEM, CI95(:));
+% 
+% figure; set(gcf,'color','w');
+% plot(mean(STi_Ks_rev),Precip_mean);
+% hold on; 
+% plot(mean(STi_Ks_rev),yCI95+Precip_mean);
+% grid;
