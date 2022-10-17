@@ -1,32 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% DATA STRUCTURE
-%   Data.Period = Period of observation data (1:length of observations)
-%   Data.Precip = Precipitation flux (mm/day)
-%   Data.Evap = Potential Evapo-Transpiration flux (mm/day)
-%   Data.Flow = Streamflow flux (mm/day)
-% PARAMETER STRUCTURE
-%   Pars.Huz = Max height of soil moisture accounting tank - Range [0, 500]
-%   Pars.B   = Distribution function shape parameter       - Range [0, 2]
-%   Pars.Alp = Quick-slow split parameter                  - Range [0, 1];
-%   Pars.Nq  = Number of quickflow routing tanks           - Range [1, 10]
-%   Pars.Kq  = Quickflow routing tanks rate parameter      - Range [0.1, 1]
-%   Pars.Ks  = Slowflow routing tanks rate parameter       - Range [0, 0.1]
-% Initialize state variables
-%   InState.XCuz = Soil moisture accounting tank state contents - Dim(1 x 1)
-%   InState.Xq   = Quickflow routing tanks state contents - Dim(1 x Pars.nq)
-%   InState.Xs   = Slowflow routing tank state contents - Dim (1 x 1)
-% MODEL STRUCTURE (The output uses a structure array, in which different
-% matrixes/vectores are stored under one 'header', i.e. 'Model')
-%   Model.XHuz = Model computed upper zone soil moisture tank state contents
-%   Model.XCuz = Model computed upper zone soil moisture tank state contents
-%   Model.Xq   = Model computed quickflow tank states contents
-%   Model.Xs   = Model computed slowflow tank state contents
-%   Model.ET   = Model computed evapotranspiration flux
-%   Model.OV   = Model computed precipitation excess flux
-%   Model.Qq   = Model computed quickflow flux
-%   Model.Qs   = Model computed slowflow flux
-%   Model.Q    = Model computed total streamflow flux
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Ruta Basijokaite
 
 clear all; 
 global Data
