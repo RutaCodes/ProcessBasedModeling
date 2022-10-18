@@ -1,3 +1,5 @@
+%Ruta Basijokaite
+
 clear all; 
 
 %Bear Lake
