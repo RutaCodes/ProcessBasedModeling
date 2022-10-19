@@ -1,3 +1,5 @@
+%Ruta Basijokaite
+
 clear all; 
 global Data
 
@@ -72,5 +74,3 @@ load pitman_Streamflow.mat
 plot(Streamflow(1:365)); hold on;
 title('Group 5 (Snow) Hydrographs');
 legend('BEA','MHA','MPO','PIT');xlim([1 365]);ylim([0 20]);set(gca,'yscale','log');
-
-
