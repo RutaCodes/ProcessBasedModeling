@@ -1,3 +1,5 @@
+%Ruta Basijokaite
+
 clear all; 
 global Data
 
@@ -276,5 +278,3 @@ YTick = [0.1,1,10,30];
 YTickLabels = cellstr(num2str(round(log10(YTick(:))), '10^%d'));
 xticks([32 62 93 124 152 183 213 244 274 305 336]);
 xticklabels({'Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'});
-
-
