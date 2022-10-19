@@ -1,3 +1,5 @@
+%Ruta Basijokaite
+
 load merced_pohono_Streamflow.mat %Streamflow
 
 figure; set(gcf,'color','w');
