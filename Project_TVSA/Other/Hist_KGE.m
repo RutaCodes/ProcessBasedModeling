@@ -1,3 +1,5 @@
+%Ruta Basijokaite
+
 load bear_lake_SA_5000ofs_yr_snow2.mat %KGEyear
 %load trinity_SA_5000sim_val_test4.mat %KGEtop_val
 
