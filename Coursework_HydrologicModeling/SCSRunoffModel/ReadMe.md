@@ -1,4 +1,6 @@
-MAIN CODE - SCSModel.R
+MAIN CODE - *SCSModel.R*
+
+Data used: *Buffalo.csv; Climate_data.csv; Genesee_data.csv; Rochester.csv; Soil_data.csv*
 
 # SCS Runoff Model
 
