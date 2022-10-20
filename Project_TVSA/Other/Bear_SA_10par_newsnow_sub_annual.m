@@ -1,3 +1,5 @@
+%Ruta Basijokaite
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DATA STRUCTURE
 %   Data.Period = Period of observation data (1:length of observations)
@@ -73,12 +75,6 @@ Data.Calib.Evap = PE_value*1000;
 % Define input distribution and ranges:
 M  = 10 ; % number of uncertain parameters 
 DistrFun  = 'unif'  ; % Parameter distribution
-% Assign feasible ranges to 12 parameters
-%DistrPar  = { [ 0.1 1 ]; [ 0 0.2 ]; [ 0 1 ]; [ 5 500]; [ 0 2 ]; [ 1 10 ]; [ 1 3 ]; [ -3 1 ]; [-3 3]; [0 0.1]; [0.9 1.1]; [0.9 1.1] } ; % Parameter ranges
-%Old parameter ranges
-%DistrPar  = { [ 0.1 1 ]; [ 0 0.2 ]; [ 0 1 ]; [ 5 500]; [ 0 2 ]; [ 1 10 ]; [ 1 3 ]; [ -3 1 ]; [-3 3]; [0 0.1] } ; 
-%New parameter ranges
-%DistrPar  = { [ 0.1 0.8 ]; [ 0 0.2 ]; [ 0 0.8 ]; [ 5 500 ]; [ 0 2 ]; [ 1 8 ]; [ 1 3 ]; [ -3 1 ]; [-2 2]; [0 0.05] } ;
 
 %New snow routine 
 DistrPar  = {  [ 0.1 0.8 ]; [ 0 0.2 ]; [ 0 0.8 ]; [ 5 500 ]; [ 0 2 ]; [ 1 8 ]; [ -3, 3 ]; [ 0, 1]; [-2 2]; [0, 0.8] } ;
@@ -99,17 +95,12 @@ Pars.Nq = 3;     %Number of quickflow routing tanks
 
 qsyr_all=zeros(60000,366,33); 
 qoyr_all=zeros(33,366);
-% NSEmo=zeros(60000,396);
-% WBmo=zeros(60000,396);
-% KGEmo=zeros(60000,396);
-% RREmo=zeros(60000,396);
-% months=[10 11 12 1 2 3 4 5 6 7 8 9];mo_cnt=0;
 
 for a=1:size(XALL,1) % for loop to cycle through random sampling parameter sets
     
     % Run model once
-    Model = Hymod10par_edit_v1_rb(Data,XALL(a,:));%new snow routine
-    %Model = Hymod01opt10par(Data,XALL(a,:));%old snow routine
+    Model = Hymod10par_new_RB(Data,XALL(a,:));%new snow routine
+    %Model = Hymod10par_old(Data,XALL(a,:));%old snow routine
     
     % Specify sim & obs - need to be same size
     qobs = Data.Calib.Flow;
@@ -161,6 +152,7 @@ for a=1:size(XALL,1) % for loop to cycle through random sampling parameter sets
         SFDCEP.high_yr_loop(a,da)=100*(SFDC_high_obs_yr_loop-SFDC_high_sim_yr_loop)./SFDC_high_obs_yr_loop;
         SFDCEP.mid_yr_loop(a,da)=100*(SFDC_mid_obs_yr_loop-SFDC_mid_sim_yr_loop)./SFDC_mid_obs_yr_loop;
         SFDCEP.low_yr_loop(a,da)=100*(SFDC_low_obs_yr_loop-SFDC_low_sim_yr_loop)./SFDC_low_obs_yr_loop;
+        
         %sub_annual  scale for last 10 years
         if j>2011%j>2003
             %monthly running window
@@ -291,16 +283,3 @@ Monthly_RMSE_STi=RSME_moSTi(1:30:end,:);
 Weekly_RMSE_STi=RSME_weSTi(1:7:end,:);
 Monthly_TE_STi=TE_moSTi(1:30:end,:);
 Weekly_TE_STi=TE_weSTi(1:7:end,:);
-
-%test 2 - normal year, test 3 - water year
-%test 4 - water year, PCF and ATCF are set to 1, to avoid misinterpretation
-%of results due to input changes from PCF
-%test 6 - SA with FDC code
-%test 9nr - SA with new parameter ranges
-%test snow1 - SA with new paranemeter ranges (from 9nr) and new snow routine
-%test snow2 - New snow routine with PET changes
-%test snow_old - Old snow routine with PET changes
-%Newrun1 - run for newly added watersheds
-%sub test1s - sub-annual
-%of results due to input changes from PCF
-%%%%%%%%%%%%%%%% figures %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
