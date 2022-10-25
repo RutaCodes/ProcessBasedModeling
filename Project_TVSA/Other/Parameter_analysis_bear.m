@@ -1,3 +1,5 @@
+%Ruta Basijokaite
+
 clear all;
 load bear_lake_SA_5000ofs_yr_test4.mat %KGEyear NSEyear
 load bear_lake_SA_5000pars_test4.mat %XALL
