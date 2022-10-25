@@ -1,3 +1,5 @@
+%Ruta Basijokaite
+
 my_dir = pwd ; % use the 'pwd' command if you have already setup the Matlab
 % Set current directory to 'my_dir' and add path to sub-folders:
 cd(my_dir)
