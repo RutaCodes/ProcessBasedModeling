@@ -1,4 +1,4 @@
-#Ruta Basijokaite
+%Ruta Basijokaite
 
 clear all; 
 global Data
