@@ -1,3 +1,5 @@
+%Ruta Basijokaite
+
 %SFDCE time series
 clear all; 
 global Data
