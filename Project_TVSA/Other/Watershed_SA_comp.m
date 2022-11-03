@@ -1,3 +1,5 @@
+%Ruta Basijokaite
+
 clear all;
 
 my_dir = pwd ; % use the 'pwd' command if you have already setup the Matlab
